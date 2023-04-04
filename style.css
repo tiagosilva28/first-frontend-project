@@ -49,9 +49,35 @@ body {
 }
 
 /* Set styles for the heart suit */
-.card--heart {
+.card--heart, .card--diamond {
     color: #e44145;
 }
+
+
+
+
+
+.card--heart .card__symbol:before {
+    content: '♥';
+}
+
+.card--club .card__symbol:before {
+    content: '♣';
+}
+.card--diamond .card__symbol:before {
+    content: '⬥';
+}
+.card--spade .card__symbol:before {
+    content: '♠';
+}
+
+/* Set styles for the spade suit */
+.card--spade, .card--club {
+    color: black;
+}
+
+
+
 
 /* Set text content for the heart suit */
 .card--heart:before,
@@ -59,15 +85,18 @@ body {
     content: attr(value) ' ♥';
 }
 
-/* Set styles for the spade suit */
-.card--spade {
-    color: black;
-}
-
-/* Set text content for the spade suit */
 .card--spade:before,
 .card--spade:after {
     content: attr(value) ' ♠';
+}
+
+.card--diamond:before,
+.card--diamond:after {
+    content: attr(value) ' ⬥';
+}
+.card--club:before,
+.card--club:after {
+    content: attr(value) ' ♣';
 }
 
 /* Set styles for the card inner container */
@@ -82,9 +111,10 @@ body {
     bottom: 24px;
 }
 
-/* Set styles for the centered card */
-.card--centered {
+
+.card__inner .card--centered{
     justify-content: center;
+    align-items: center;
 }
 
 /* Set styles for the column container inside the card */
@@ -103,41 +133,20 @@ body {
     text-align: center;
 }
 
+
 /* Set font size and line height for the suit symbol before each card */
 .card__symbol .card:before {
     font-size: 40px;
     line-height: 40px;
 }
 
-/* Set content for the heart suit symbol before each card */
-.card--heart .card:before {
-    content: '♥';
-}
 
-/* Set content for the spade suit symbol before each card */
-.card--spade .card:before {
-    content: '♠';
-}
-
-/* Set rotation for the rotated card and last card */
-.card--rotated,
-.card:last-of-type {
-    transform: rotate(180deg);
-}
-
-/* Set rotation for the first card */
-.card:first-of-type {
-    transform: rotate(0);
-}
-
-/* Set size for the big card */
-.card--big {
-    flex-basis: 60px;
-}
 
 /* Set size for the huge card */
 .card--huge {
-    flex-basis: 108px;
+    font-size: 80px;
+    height: 80px;
+    width: 80px;
 }
 
 /* Set styles for the title */
@@ -146,3 +155,18 @@ body {
     color: #444;
     text-align: center;
 }
+
+
+.center-symbol-justify {
+    justify-content: center;
+}
+.center-symbol-align {
+    align-items: center;
+}
+.justify-space-around {
+    justify-content: space-around;
+}
+
+
+
+
