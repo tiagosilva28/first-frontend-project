@@ -53,10 +53,6 @@ body {
     color: #e44145;
 }
 
-
-
-
-
 .card--heart .card__symbol:before {
     content: '♥';
 }
@@ -151,7 +147,7 @@ body {
 
 /* Set styles for the title */
 .title {
-    font: 18px 'Trebuchet MS';
+    font: 18px 'Lato', sans-serif;
     color: #444;
     text-align: center;
 }
@@ -167,6 +163,22 @@ body {
     justify-content: space-around;
 }
 
+.card:hover{
+    cursor: pointer;
+    transition: transform 1500ms;
+    transform: rotateY(180deg);
+  }
 
+  .backcard{
+    
+    border-radius: 4px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
 
-
+  .backcard:hover{
+    background-color: #025949;
+    z-index:2;
+  }
