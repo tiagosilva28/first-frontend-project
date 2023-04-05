@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BoardGame</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="board.css" />
+  </head>
+  <header class="header">
+    <a href="" class="logo">CSS Nav</a>
+    <input class="menu-btn" type="checkbox" id="menu-btn" />
+    <label class="menu-icon" for="menu-btn"
+      ><span class="navicon"></span
+    ></label>
+    <ul class="menu">
+      <li><a href="#work">Our Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#careers">Careers</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </header>
+  <body>
+    <div class="container">
+      <div class="playerOne">
+        <section class="card">
+          <div class="backcard"></div>
+        </section>
+      </div>
+      <div class="playerTwo">
+        <section class="card">
+          <div class="backcard"></div>
+        </section>
+      </div>
+      <div class="p2attempt">
+        <section class="card card--club" value="2">
+          <div class="card__inner center-symbol-justify">
+            <div class="card__column">
+              <div class="card__symbol"></div>
+              <div class="card__column">
+                <div class="card__symbol"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="p1attempt">
+        <section class="card card--club" value="A">
+          <div class="card__inner center-symbol-justify center-symbol-align">
+            <div class="card__column">
+              <div class="card__symbol card--huge"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

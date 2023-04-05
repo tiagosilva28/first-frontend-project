@@ -8,8 +8,10 @@ body {
 /* Center the cards container and set a maximum width */
 .cards {
     text-align: center;
-    max-width: 640px;
+    max-width: 1200px;
     margin: 0 auto;
+    perspective: 1000px;
+    
 }
 
 /* Set styles for each individual card */
@@ -23,6 +25,8 @@ body {
     border-radius: 4px;
     background: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+    transform-style: preserve-3d; 
+    /* backface-visibility: hidden; */
 }
 
 /* Set styles for the text before and after each card */
@@ -61,7 +65,7 @@ body {
     content: '♣';
 }
 .card--diamond .card__symbol:before {
-    content: '⬥';
+    content: '♦';
 }
 .card--spade .card__symbol:before {
     content: '♠';
@@ -88,7 +92,7 @@ body {
 
 .card--diamond:before,
 .card--diamond:after {
-    content: attr(value) ' ⬥';
+    content: attr(value) ' ♦';
 }
 .card--club:before,
 .card--club:after {
@@ -131,10 +135,10 @@ body {
 
 
 /* Set font size and line height for the suit symbol before each card */
-.card__symbol .card:before {
+/* .card__symbol .card:before {
     font-size: 40px;
     line-height: 40px;
-}
+} */
 
 
 
@@ -170,15 +174,44 @@ body {
   }
 
   .backcard{
-    
     border-radius: 4px;
     position: absolute;
     width: 100%;
     height: 100%;
     z-index: -1;
+    transition-delay: 0.5s;
   }
 
-  .backcard:hover{
+  .backcard:hover, .backcard:focus {
     background-color: #025949;
     z-index:2;
   }
+
+  /* .card__inner:hover .backcard {
+    background-color: #025949;
+    z-index: 2;
+  } */
+
+
+  /* .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  }
+  .card2 { 
+    position: relative;
+    display: inline-block;
+    width: 172px;
+    height: 240px;
+    font: 16px 'Trebuchet MS';
+    margin: 10px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+    transform-style: preserve-3d; 
+    perspective: 1000px;
+  } */
