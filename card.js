@@ -63,19 +63,29 @@ function createCard (naipe, value) {
 
 let deck = [];
 function drawDeck() {
-   let element = document.getElementById("p2card");
+  // let element = document.getElementById("p2card");
   let naipes = ["club", "heart", "diamond","spade"];
   let values = {1:"2",2:"3",3:"4",4:"5",5:"6",6:"7",7:"8",8:"9",9:"10",10:"J",11:"Q",12:"K",13:"A"};
   for(i=0; i < naipes.length; i++) {
     for(j=0; j < Object.keys(values).length; j++) {
       let cardNova = createCard(naipes[i],Object.values(values)[j])
-       element.innerHTML = cardNova;
+      //  element.innerHTML += cardNova;
       console.log(cardNova);
       deck.push(cardNova);
     }
   }
 }
 drawDeck();
-console.log(deck);
+let shuffledArray = deck.sort((a, b) => 0.5 - Math.random());
+for(i=0; i < shuffledArray.length; i++) {
+  let element = document.getElementById("p2card");
+  element.innerHTML += shuffledArray[i];
+}
+  
+
+
+
+
+
 
 
