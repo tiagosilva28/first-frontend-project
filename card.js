@@ -12,6 +12,8 @@ let c = "</div>";
 
 
 
+
+
 function otherCards(value) {
   switch(value) {
     case "A": innercard = `${inner}${aCenter}${jCenter}">${column}">${symbol}${huge}">${c.repeat(3)}`;
@@ -46,16 +48,34 @@ function otherCards(value) {
 
 
 
-
-
 function createCard (naipe, value) {
   otherCards(value)
-    const element = document.getElementById("p2card");
-    console.log(element);
-    const card = ` 
+    // const element = document.getElementById("p2card");
+    let card =` 
     <section id="1" class="card card--${naipe}" value="${value}">
           ${innercard}
       </section>`;
-   element.innerHTML = card;
+  //  element.innerHTML = card;
+  return card;
+   
 }
-createCard("club", "10");
+// createCard("club","A")
+
+let deck = [];
+function drawDeck() {
+   let element = document.getElementById("p2card");
+  let naipes = ["club", "heart", "diamond","spade"];
+  let values = {1:"2",2:"3",3:"4",4:"5",5:"6",6:"7",7:"8",8:"9",9:"10",10:"J",11:"Q",12:"K",13:"A"};
+  for(i=0; i < naipes.length; i++) {
+    for(j=0; j < Object.keys(values).length; j++) {
+      let cardNova = createCard(naipes[i],Object.values(values)[j])
+       element.innerHTML = cardNova;
+      console.log(cardNova);
+      deck.push(cardNova);
+    }
+  }
+}
+drawDeck();
+console.log(deck);
+
+
