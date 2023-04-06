@@ -11,6 +11,9 @@
     />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="board.css" />
+
+    <!-- <script src="script.js"></script> -->
+    
   </head>
   <header class="header">
     <a href="" class="logo">War Game</a>
@@ -51,6 +54,7 @@
             </div>
           </div>
         </section>
+        <div id="p2card"></div>
       </div>
       <div class="p1attempt">
         <h3 class="title">Player 1 Attempt</h3>
@@ -63,15 +67,10 @@
         </section>
       </div>
     </div>
-    <div
-      style="
-        padding-top: 100px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      "
-    >
-      <button class="custom-btn btn-13">Click here to do the magic</button>
+    <div class = "button-container">
+      <button id="button" onclick="push()" class="custom-btn btn-13">Click here to do the magic</button>
+      <p id="push"></p>
     </div>
   </body>
+  <script type="text/javascript" src="card.js"></script>
 </html>
