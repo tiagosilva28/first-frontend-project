@@ -77,8 +77,8 @@ function drawDeck() {
 
 }
 drawDeck();
-console.log(p1Deck);
-console.log(p2Deck);
+// console.log(p1Deck);
+// console.log(p2Deck);
 
 // function shuffle() {
 // let shuffledArray = deck.sort((a, b) => 0.5 - Math.random());
@@ -125,12 +125,19 @@ function play() {
 }
 
 function war(p1,p2) {
-let value = p1.slice(p1.indexOf('value="') + 1);
-console.log(value);
-let value2 = p2.slice(p1.indexOf('value="') + 1);
-console.log(value2);
+  let match1 = p1.match(/value="([^"]+)"/);
+  let match2 = p2.match(/value="([^"]+)"/);
+  let p1try = match1[1];
+  console.log(p1try);
+  let p2try = match2[1];
+  console.log(p2try);
+if(p1try == p2try) {
+  let element = document.getElementById("warContainer");
+  element.innerHTML = "WAAAAARRRRR!!!"
 }
-war(p1,p2);
+
+}
+
 
 
 

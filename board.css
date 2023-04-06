@@ -244,3 +244,10 @@ padding-top: 100px;
         justify-content: center;
         align-items: center;
 }
+
+#warContainer {
+  padding-bottom: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
