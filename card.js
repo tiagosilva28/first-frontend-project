@@ -1,3 +1,4 @@
+if (typeof window !== "undefined") {
 
 let innercard, valete, queen, king;
 let inner = '<div class="card__inner ';
@@ -75,6 +76,7 @@ function drawDeck() {
     }
   }
 }
+
 drawDeck();
 let shuffledArray = deck.sort((a, b) => 0.5 - Math.random());
 for(i=0; i < shuffledArray.length; i++) {
@@ -89,3 +91,6 @@ for(i=0; i < shuffledArray.length; i++) {
 
 
 
+
+
+}
