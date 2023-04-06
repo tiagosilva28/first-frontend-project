@@ -11,9 +11,6 @@ let jSpcAround = "justify-space-around ";
 let c = "</div>";
 
 
-
-
-
 function otherCards(value) {
   switch(value) {
     case "A": innercard = `${inner}${aCenter}${jCenter}">${column}">${symbol}${huge}">${c.repeat(3)}`;
@@ -36,11 +33,11 @@ function otherCards(value) {
     break;
     case "10": innercard = `${inner}">${column}">${symbolC.repeat(4)}${c}${column}${aCenter}${jSpcAround}">${symbolC.repeat(2)}${c}${column}">${symbolC.repeat(4)}${c.repeat(2)}`;
     break;
-    case "J" : innercard = valete;
+    case "J" : innercard = `${inner}"><img src="img/cardback.png">${c}`;
     break;
-    case "Q" : innercard = queen;
+    case "Q" : innercard = `${inner}"><img src="img/cardback.png">${c}`;
     break;
-    case "K" : innercard = king;
+    case "K" : innercard = `${inner}"><img src="img/cardback.png">${c}`;
     break;
     default: innercard = undefined;
   }
