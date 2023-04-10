@@ -17,7 +17,7 @@ if (typeof window !== "undefined") {
   let p1card,p2card,p1WarCards,p2WarCards;
   
   
-  function otherCards(value) {
+  function otherCards(value,naipe) {
     switch(value) {
       case "A": innercard = `${inner}${aCenter}${jCenter}">${column}">${symbol}${huge}">${c.repeat(3)}`;
       break;
@@ -39,11 +39,11 @@ if (typeof window !== "undefined") {
       break;
       case "10": innercard = `${inner}">${column}">${symbolC.repeat(4)}${c}${column}${aCenter}${jSpcAround}">${symbolC.repeat(2)}${c}${column}">${symbolC.repeat(4)}${c.repeat(2)}`;
       break;
-      case "J" : innercard = `${inner}"><img src="img/cardback.png">${c}`;
+      case "J" : innercard = `${inner}"><img src="img/cards/${naipe}-${value}.png">${c}`;
       break;
-      case "Q" : innercard = `${inner}"><img src="img/cardback.png">${c}`;
+      case "Q" : innercard = `${inner}"><img src="img/cards/${naipe}-${value}.png">${c}`;
       break;
-      case "K" : innercard = `${inner}"><img src="img/cardback.png">${c}`;
+      case "K" : innercard = `${inner}"><img src="img/cards/${naipe}-${value}.png">${c}`;
       break;
       default: innercard = `${inner}"><img src="img/cardback.png">${c}`;
     }
@@ -51,7 +51,7 @@ if (typeof window !== "undefined") {
   
   
   function createCard (naipe, value) {
-    otherCards(value)
+    otherCards(value,naipe)
       let card =` 
       <section class="card card--${naipe}" value="${value}">
             ${innercard}
@@ -136,21 +136,21 @@ if (typeof window !== "undefined") {
 
    element.innerHTML = "WARRRRRRRR";
 
-   const warback = document.getElementsByClassName("warback")
+  //  const warback = document.getElementsByClassName("warback")
 
-   const p1att = document.getElementById("primary2");
-   p1att.style.display = "none";
+  //  const p1att = document.getElementById("primary2");
+  //  p1att.style.display = "none";
 
-   const p2att = document.getElementById("primary1");
-   p2att.style.display = "none";
+  //  const p2att = document.getElementById("primary1");
+  //  p2att.style.display = "none";
 
-   const p1war = document.getElementById("p1war");
-   p1war.style.display = "flex";
+  //  const p1war = document.getElementById("p1war");
+  //  p1war.style.display = "flex";
    
-   const p2war = document.getElementById("p2war");
-   p2war.style.display = "flex";
+  //  const p2war = document.getElementById("p2war");
+  //  p2war.style.display = "flex";
 
-   warback.innerHTML = createCard(".","P");
+  //  warback.innerHTML = createCard(".","P");
   }
   
   }
