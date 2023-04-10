@@ -251,3 +251,20 @@ padding-top: 100px;
         justify-content: center;
         align-items: center;
 }
+
+#p1war {
+  display: none;
+  
+}
+#p2war {
+  display: none;
+}
+
+#p1attempt {
+  width: 212px;
+  height: 320px;
+}
+#p2attempt {
+  width: 212px;
+  height: 320px;
+}

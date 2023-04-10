@@ -11,9 +11,6 @@
     />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="board.css" />
-
-    <!-- <script src="script.js"></script> -->
-    
   </head>
   <header class="header">
     <a href="" class="logo">War Game</a>
@@ -42,35 +39,55 @@
           <div class="backcard"></div>
         </section>
       </div>
-      <div class="p2attempt">
-        <h3 class="title">Player 2 Attempt</h3>
-        <div id="p2card"></div>
-        <!-- <section class="card card--club" value="2">
-          <div class="card__inner center-symbol-justify">
-            <div class="card__column">
-              <div class="card__symbol"></div>
-              <div class="card__column">
-                <div class="card__symbol"></div>
-              </div>
-            </div>
-          </div>
-        </section> -->
+      <div id="p2attempt">
+        <div id="primary2">
+          <h3 class="title">Player 2 Attempt</h3>
+          <div id="p2card"></div>
+        </div>
+        <div id="p2war">
+          LOLOLOLOLOLOL
+          <div
+            class="card backcard warback"
+            style="z-index: 0; left: 10px"
+          ></div>
+          <div
+            class="card backcard warback"
+            style="z-index: 1; left: 20px"
+          ></div>
+          <div
+            class="card backcard warback"
+            style="z-index: 2; left: 30px"
+          ></div>
+          <div id="warf1"></div>
+        </div>
       </div>
-      <div class="p1attempt">
-        <h3 class="title">Player 1 Attempt</h3>
-        <div id="p1card"></div>
-        <!-- <section class="card card--club" value="A">
-          <div class="card__inner center-symbol-justify center-symbol-align">
-            <div class="card__column">
-              <div class="card__symbol card--huge"></div>
-            </div>
-          </div>
-        </section> -->
-      </div>
+      <div id="p1attempt">
+        <div id="primary1">
+          <h3 class="title">Player 1 Attempt</h3>
+          <div id="p1card"></div>
+        </div>
+        <div id="p1war">
+          LOLOLOLOLOLOL
+          <div
+            class="card backcard warback"
+            style="z-index: 0; left: 10px"
+          ></div>
+          <div
+            class="card backcard warback"
+            style="z-index: 1; left: 20px"
+          ></div>
+          <div
+            class="card backcard warback"
+            style="z-index: 2; left: 30px"
+          ></div>
+          <div id="warf2"></div>
+        </div>
     </div>
     <div id="warContainer"></div>
-    <div class = "button-container">
-      <button id="button" onclick="play()" class="custom-btn btn-13">Click here to do the magic</button>
+    <div class="button-container">
+      <button id="button" onclick="play()" class="custom-btn btn-13">
+        Click here to do the magic
+      </button>
       <p id="push"></p>
     </div>
   </body>

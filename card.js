@@ -45,7 +45,7 @@ if (typeof window !== "undefined") {
       break;
       case "K" : innercard = `${inner}"><img src="img/cardback.png">${c}`;
       break;
-      default: innercard = undefined;
+      default: innercard = `${inner}"><img src="img/cardback.png">${c}`;
     }
   }
   
@@ -106,9 +106,12 @@ if (typeof window !== "undefined") {
      let p1try = match1[1];
      let p2try = match2[1];
      compare(p1try,p2try);
+
+     
   }
   
   function compare(p1,p2) {
+
     
     let p1key = Object.keys(values).indexOf(p1)
     let p2key = Object.keys(values).indexOf(p2);
@@ -127,9 +130,27 @@ if (typeof window !== "undefined") {
   }
   
   function war() {
+  
    p1WarCards = p1Deck.splice(0, 3);
    p2WarCards = p2Deck.splice(0, 3);
+
    element.innerHTML = "WARRRRRRRR";
+
+   const warback = document.getElementsByClassName("warback")
+
+   const p1att = document.getElementById("primary2");
+   p1att.style.display = "none";
+
+   const p2att = document.getElementById("primary1");
+   p2att.style.display = "none";
+
+   const p1war = document.getElementById("p1war");
+   p1war.style.display = "flex";
+   
+   const p2war = document.getElementById("p2war");
+   p2war.style.display = "flex";
+
+   warback.innerHTML = createCard(".","P");
   }
   
   }
