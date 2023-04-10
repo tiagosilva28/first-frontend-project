@@ -1,20 +1,20 @@
 if (typeof window !== "undefined") {
-  let p1card,p2card,p1WarCards,p2WarCards;
-  let deck = [];
-  let p1Deck = [];
-  let p2Deck = [];
-  let element = document.getElementById("warContainer");
-  let values = {1:"2",2:"3",3:"4",4:"5",5:"6",6:"7",7:"8",8:"9",9:"10",10:"J",11:"Q",12:"K",13:"A"};
+  const deck = [];
+  const p1Deck = [];
+  const p2Deck = [];
+  const element = document.getElementById("warContainer");
+  const values = {1:"2",2:"3",3:"4",4:"5",5:"6",6:"7",7:"8",8:"9",9:"10",10:"J",11:"Q",12:"K",13:"A"};
+  const inner = '<div class="card__inner ';
+  const symbol = '<div class="card__symbol ';
+  const symbolC = '<div class="card__symbol"></div>';
+  const column = '<div class="card__column ';
+  const huge = 'card--huge ';
+  const aCenter = "center-symbol-align ";
+  const jCenter = "center-symbol-justify ";
+  const jSpcAround = "justify-space-around ";
+  const c = "</div>";
   let innercard;
-  let inner = '<div class="card__inner ';
-  let symbol = '<div class="card__symbol ';
-  let symbolC = '<div class="card__symbol"></div>';
-  let column = '<div class="card__column ';
-  let huge = 'card--huge ';
-  let aCenter = "center-symbol-align ";
-  let jCenter = "center-symbol-justify ";
-  let jSpcAround = "justify-space-around ";
-  let c = "</div>";
+  let p1card,p2card,p1WarCards,p2WarCards;
   
   
   function otherCards(value) {
@@ -61,7 +61,7 @@ if (typeof window !== "undefined") {
   
   
   function drawDeck() {
-    let naipes = ["club", "heart", "diamond","spade"]; 
+    const naipes = ["club", "heart", "diamond","spade"]; 
     for(i=0; i < naipes.length; i++) {
       for(j=0; j < Object.keys(values).length; j++) {
         let newCard = createCard(naipes[i],Object.values(values)[j])
@@ -74,13 +74,13 @@ if (typeof window !== "undefined") {
   
   function dealCards(deck) {
     
-    // Shuffle the deck using the Fisher-Yates shuffle algorithm
+    // Shuffle 
     for (let i = deck.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [deck[i], deck[j]] = [deck[j], deck[i]];
     }
     
-    // Distribute the cards evenly between the two players
+    // Distribute the cards
     for (let i = 0; i < deck.length; i++) {
       if (i % 2 === 0) {
         p1Deck.push(deck[i]);
@@ -97,8 +97,8 @@ if (typeof window !== "undefined") {
   }
   
   function play() {
-     let element1 = document.getElementById("p1card");
-     let element2 = document.getElementById("p2card");
+     const element1 = document.getElementById("p1card");
+     const element2 = document.getElementById("p2card");
      p1card = element1.innerHTML = p1Deck.shift();
      p2card = element2.innerHTML = p2Deck.shift();
      let match1 = p1card.match(/value="([^"]+)"/);
