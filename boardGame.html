@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="board.css" />
 
     <!-- <script src="script.js"></script> -->
-    
   </head>
   <header class="header">
     <a href="" class="logo">War Game</a>
@@ -42,29 +41,38 @@
           <div class="backcard"></div>
         </section>
       </div>
-      <div class="p2attempt">
+      <div class="p2attempt" id="p2at">
         <h3 class="title">Player 2 Attempt</h3>
         <div id="p2card"></div>
       </div>
-      
-      <div class="p1attempt">
-        <h3 class="title">Player 1 Attempt</h3>
-        <div id="p1card"></div>
-        
+      <div id="p2war">
+        PLAYER 2 WARRRRRR
+        <div class="warback" style="z-index: 0; left: 10px"></div>
+        <div class="warback" style="z-index: 1; left: 20px"></div>
+        <div class="warback" style="z-index: 2; left: 30px"></div>
+        <div id="warf2"></div>
+      </div>
+      <div class="p1attempt" id="p1at">
+        <div id="p1normal">
+           <h3 class="title">Player 1 Attempt</h3>
+           <div id="p1card"></div>
+        </div>
+        <div id="p1war" style="position: relative">
+          PLAYER 1 WARRRRRR
+          <div class="warback" style="position: absolute; top: 30px ;z-index: 0; left: 10px;"></div>
+          <div class="warback" style="position: absolute; top: 30px ;z-index: 1; left: 30px"></div>
+          <div class="warback" style="position: absolute; top: 30px ;z-index: 2; left: 50px"></div>
+          <div id="warf1"></div>
+        </div>
       </div>
     </div>
     <div id="warContainer"></div>
-    <div class = "button-container">
-      <button id="button" onclick="play()" class="custom-btn btn-13">Click here to do the magic</button>
+    <div class="button-container">
+      <button id="button"  onclick="play()" class="custom-btn btn-13">
+        Click here to do the magic
+      </button>
       <p id="push"></p>
     </div>
   </body>
   <script type="text/javascript" src="card.js"></script>
 </html>
-
-
-
-
-
-
-

@@ -28,9 +28,11 @@
   
   .playerTwo { grid-area: playerTwo; }
   
-  .p2attempt { grid-area: p2attempt; }
+  .p2attempt { grid-area: p2attempt;
+  display: block; }
   
-  .p1attempt { grid-area: p1attempt; }
+  .p1attempt { grid-area: p1attempt;
+  display: block; }
 
   .backcard{
     border-radius: 4px;
@@ -258,6 +260,10 @@ padding-top: 100px;
 }
 #p2war {
   display: none;
+}
+
+.warback {
+  animation-duration: 2s;
 }
 
 /* #p1attempt {

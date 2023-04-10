@@ -104,18 +104,18 @@ if (typeof window !== "undefined") {
      let match1 = p1card.match(/value="([^"]+)"/);
      let match2 = p2card.match(/value="([^"]+)"/);
      let p1try = match1[1];
+    //  console.log(p1try);
      let p2try = match2[1];
+    //  console.log(p2try);
      compare(p1try,p2try);
 
      
   }
   
-  function compare(p1,p2) {
-
-    
-    let p1key = Object.keys(values).indexOf(p1)
-    let p2key = Object.keys(values).indexOf(p2);
-  
+  function compare(p1,p2) { 
+    let p1key = Object.keys(values).find(key => values[key] === p1);
+    let p2key = Object.keys(values).find(key => values[key] === p2);
+   
     if (p1key > p2key) { 
      p1Deck.push(p1card,p2card);
      element.innerHTML = "";
@@ -133,24 +133,27 @@ if (typeof window !== "undefined") {
   
    p1WarCards = p1Deck.splice(0, 3);
    p2WarCards = p2Deck.splice(0, 3);
+   //disable normal button
+  //  let normalButton = document.querySelector(".btn-13")
+  //  normalButton.disabled = true;
 
    element.innerHTML = "WARRRRRRRR";
 
-  //  const warback = document.getElementsByClassName("warback")
+   const warbacks = document.getElementsByClassName("warback");
 
-  //  const p1att = document.getElementById("primary2");
-  //  p1att.style.display = "none";
+   let p2att = document.getElementById("p2at");
+   p2att.style.display = "none";
+   let p1att = document.getElementById("p1normal");
+   p1att.style.display = "none";
 
-  //  const p2att = document.getElementById("primary1");
-  //  p2att.style.display = "none";
-
-  //  const p1war = document.getElementById("p1war");
-  //  p1war.style.display = "flex";
+   let p1war = document.getElementById("p1war");
+   p1war.style.display = "block";
    
-  //  const p2war = document.getElementById("p2war");
-  //  p2war.style.display = "flex";
+   let p2war = document.getElementById("p2war");
+   p2war.style.display = "block";
+   console.log(createCard(".","."));
 
-  //  warback.innerHTML = createCard(".","P");
+ Array.from(warbacks).forEach(element => {element.innerHTML = createCard(".",".")});
   }
   
   }
