@@ -52,7 +52,6 @@ if (typeof window !== "undefined") {
   
   function createCard (naipeOf, valueOf, keyOf) {
     let card = {naipe : naipeOf , value : valueOf, key : keyOf};
-    console.log(card);
     return card;
   }
   
@@ -156,6 +155,8 @@ if (typeof window !== "undefined") {
    p2war.style.display = "block";
 
    Array.from(warbacks).forEach(element => {element.innerHTML = generateCard(".",".")});
+   
+   return play();
   }
   
   }
