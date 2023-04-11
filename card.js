@@ -1,7 +1,8 @@
 if (typeof window !== "undefined") {
-  const deck = [];
-  const p1Deck = [];
-  const p2Deck = [];
+  let deck = [];
+  let p1Deck = [];
+  let p2Deck = [];
+  
   const warContainer = document.getElementById("warContainer");
   const values = {1:"2",2:"3",3:"4",4:"5",5:"6",6:"7",7:"8",8:"9",9:"10",10:"J",11:"Q",12:"K",13:"A"};
   const inner = '<div class="card__inner ';
@@ -14,7 +15,9 @@ if (typeof window !== "undefined") {
   const jSpcAround = "justify-space-around ";
   const c = "</div>";
   let innercard;
-  let p1card,p2card,p1WarCards,p2WarCards;
+  let p1card,p2card;
+  let p1WarCards = [];
+  let p2WarCards = [];
   
   
   function otherCards(value,naipe) {
@@ -66,6 +69,10 @@ if (typeof window !== "undefined") {
     dealCards(deck);
   }
   drawDeck();
+  console.log(deck);
+  console.log(p1Deck);
+  console.log(p2Deck);
+
   
   function dealCards(deck) {
     
@@ -76,14 +83,12 @@ if (typeof window !== "undefined") {
     }
     
     // Distribute the cards
-    for (let i = 0; i < deck.length; i++) {
-      if (i % 2 === 0) {
-        p1Deck.push(deck[i]);
-      } else {
-        p2Deck.push(deck[i]);
-      }
+      p1Deck = deck.slice(0,(deck.length/2));
+
+      p2Deck = deck.slice((deck.length/2), deck.length);
+
     }
-  }
+  
 
   function generateCard(naipe,value){
     otherCards(value,naipe);
@@ -97,8 +102,8 @@ if (typeof window !== "undefined") {
   function play() {
      const element1 = document.getElementById("p1card");
      const element2 = document.getElementById("p2card");
-     let p1card = p1Deck.shift();
-     let p2card = p2Deck.shift();
+      p1card = p1Deck.shift();
+      p2card = p2Deck.shift();
      element1.innerHTML = generateCard(p1card.naipe, p1card.value);
      element2.innerHTML = generateCard(p2card.naipe, p2card.value);
      compare(p1card.key,p2card.key);
@@ -106,16 +111,17 @@ if (typeof window !== "undefined") {
   }
   
   function compare(p1,p2) { 
-
+    console.log(p1card);
     if (p1 > p2) { 
      p1Deck.push(p1card,p2card);
      warContainer.innerHTML = "";
-  
-    } else if (p1 < p2) {
+    } 
+    
+     else if (p1 < p2) {
      p2Deck.push(p1card,p2card);
-     warContainer.innerHTML = "";
-  
-    } else {
+     warContainer.innerHTML = "";}
+
+     else {
       war();
     }
   }
@@ -150,15 +156,35 @@ if (typeof window !== "undefined") {
 
    let p1war = document.getElementById("p1war");
    p1war.style.display = "block";
+
    
    let p2war = document.getElementById("p2war");
    p2war.style.display = "block";
 
    Array.from(warbacks).forEach(element => {element.innerHTML = generateCard(".",".")});
-   
-   return play();
+
+  let p1 = document.getElementById("warf1");
+  let p2 = document.getElementById("warf2");
+
+ let p1cardWar = p1Deck.shift();
+ let p2cardWar = p2Deck.shift();
+  p1.innerHTML = generateCard(p1card.naipe, p1card.value);
+  p2.innerHTML = generateCard(p2card.naipe, p2card.value);
+
+    // compare(p1card.key,p2card.key);
+    if(p1cardWar.key > p2cardWar.key) {
+      p1Deck.push(p1card,p2card,p1cardWar,p2cardWar);
+      p1Deck = [...p1Deck,...p1WarCards,...p2WarCards];
+      console.log(p1Deck.length);
+      return p1Deck;
+    } else if (p2cardWar.key > p1cardWar.key) { 
+      p2Deck.push(p1card,p2card,p1cardWar,p2cardWar);
+      p2Deck = [...p2Deck,...p1WarCards,...p2WarCards];
+      console.log(p2Deck.length);
+      return p2Deck;
+    } else {war();}
   }
-  
+  // return;
   }
   
   
