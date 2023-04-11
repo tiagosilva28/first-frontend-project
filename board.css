@@ -266,7 +266,11 @@ padding-top: 100px;
 
 .warback {
   position: absolute;
-   top: 30px;
+   top: 60px;
+}
+
+.container .card:hover {
+  transform: rotate(0deg);
 }
 
 /* #p1attempt {

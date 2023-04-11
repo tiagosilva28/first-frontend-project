@@ -2,7 +2,7 @@ if (typeof window !== "undefined") {
   const deck = [];
   const p1Deck = [];
   const p2Deck = [];
-  const element = document.getElementById("warContainer");
+  const warContainer = document.getElementById("warContainer");
   const values = {1:"2",2:"3",3:"4",4:"5",5:"6",6:"7",7:"8",8:"9",9:"10",10:"J",11:"Q",12:"K",13:"A"};
   const inner = '<div class="card__inner ';
   const symbol = '<div class="card__symbol ';
@@ -50,23 +50,19 @@ if (typeof window !== "undefined") {
   }
   
   
-  function createCard (naipe, value) {
-    otherCards(value,naipe)
-      let card =` 
-      <section class="card card--${naipe}" value="${value}">
-            ${innercard}
-        </section>`;
+  function createCard (naipeOf, valueOf, keyOf) {
+    let card = {naipe : naipeOf , value : valueOf, key : keyOf};
+    console.log(card);
     return card;
   }
-  
   
   function drawDeck() {
     const naipes = ["club", "heart", "diamond","spade"]; 
     for(i=0; i < naipes.length; i++) {
       for(j=0; j < Object.keys(values).length; j++) {
-        let newCard = createCard(naipes[i],Object.values(values)[j])
+        let newCard = createCard(naipes[i],Object.values(values)[j],Object.keys(values)[j])
         deck.push(newCard);
-      }
+      } 
     }
     dealCards(deck);
   }
@@ -89,36 +85,52 @@ if (typeof window !== "undefined") {
       }
     }
   }
+
+  function generateCard(naipe,value){
+    otherCards(value,naipe);
+    let card =` 
+    <section class="card card--${naipe}" value="${value}">
+          ${innercard}
+      </section>`;
+  return card;
+  }
   
   function play() {
      const element1 = document.getElementById("p1card");
      const element2 = document.getElementById("p2card");
-     p1card = element1.innerHTML = p1Deck.shift();
-     p2card = element2.innerHTML = p2Deck.shift();
-     let match1 = p1card.match(/value="([^"]+)"/);
-     let match2 = p2card.match(/value="([^"]+)"/);
-     let p1try = match1[1];
-     let p2try = match2[1];
-     compare(p1try,p2try);
+     let p1card = p1Deck.shift();
+     let p2card = p2Deck.shift();
+     element1.innerHTML = generateCard(p1card.naipe, p1card.value);
+     element2.innerHTML = generateCard(p2card.naipe, p2card.value);
+     compare(p1card.key,p2card.key);
 
   }
   
   function compare(p1,p2) { 
-    let p1key = Object.keys(values).find(key => values[key] === p1);
-    let p2key = Object.keys(values).find(key => values[key] === p2);
-   
-    if (p1key > p2key) { 
+
+    if (p1 > p2) { 
      p1Deck.push(p1card,p2card);
-     element.innerHTML = "";
+     warContainer.innerHTML = "";
   
-    } else if (p1key < p2key) {
+    } else if (p1 < p2) {
      p2Deck.push(p1card,p2card);
-     element.innerHTML = "";
+     warContainer.innerHTML = "";
   
     } else {
       war();
     }
   }
+
+  function changeCardCounter(p1cards) {
+    p1cards = p1Deck.length;
+    p2cards = p2Deck.length;
+    document.getElementById("scoreOne").innerHTML = `Cards Left: ${p1cards}`;
+    document.getElementById("scoreTwo").innerHTML = `Cards Left: ${p2cards}`;
+  }
+
+  document.getElementById("button").addEventListener("click", changeCardCounter);
+
+  
   
   function war() {
   
@@ -128,7 +140,7 @@ if (typeof window !== "undefined") {
   //  let normalButton = document.querySelector(".btn-13")
   //  normalButton.disabled = true;
 
-   element.innerHTML = "WARRRRRRRR";
+  warContainer.innerHTML = "WARRRRRRRR";
 
    const warbacks = document.getElementsByClassName("warback");
 
@@ -143,7 +155,7 @@ if (typeof window !== "undefined") {
    let p2war = document.getElementById("p2war");
    p2war.style.display = "block";
 
-   Array.from(warbacks).forEach(element => {element.innerHTML = createCard(".",".")});
+   Array.from(warbacks).forEach(element => {element.innerHTML = generateCard(".",".")});
   }
   
   }
