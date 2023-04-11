@@ -256,14 +256,17 @@ padding-top: 100px;
 
 #p1war {
   display: none;
+  position:relative;
   
 }
 #p2war {
   display: none;
+  position: relative;
 }
 
 .warback {
-  animation-duration: 2s;
+  position: absolute;
+   top: 30px;
 }
 
 /* #p1attempt {

@@ -88,12 +88,6 @@ if (typeof window !== "undefined") {
         p2Deck.push(deck[i]);
       }
     }
-    
-   // Return an object containing each player's deck
-    return {
-      player1: p1Deck,
-      player2: p2Deck
-    };
   }
   
   function play() {
@@ -104,12 +98,9 @@ if (typeof window !== "undefined") {
      let match1 = p1card.match(/value="([^"]+)"/);
      let match2 = p2card.match(/value="([^"]+)"/);
      let p1try = match1[1];
-    //  console.log(p1try);
      let p2try = match2[1];
-    //  console.log(p2try);
      compare(p1try,p2try);
 
-     
   }
   
   function compare(p1,p2) { 
@@ -141,7 +132,7 @@ if (typeof window !== "undefined") {
 
    const warbacks = document.getElementsByClassName("warback");
 
-   let p2att = document.getElementById("p2at");
+   let p2att = document.getElementById("p2normal");
    p2att.style.display = "none";
    let p1att = document.getElementById("p1normal");
    p1att.style.display = "none";
@@ -151,9 +142,8 @@ if (typeof window !== "undefined") {
    
    let p2war = document.getElementById("p2war");
    p2war.style.display = "block";
-   console.log(createCard(".","."));
 
- Array.from(warbacks).forEach(element => {element.innerHTML = createCard(".",".")});
+   Array.from(warbacks).forEach(element => {element.innerHTML = createCard(".",".")});
   }
   
   }
