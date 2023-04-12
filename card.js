@@ -3,7 +3,8 @@ if (typeof window !== "undefined") {
   let p1Deck = [];
   let p2Deck = [];
   let container = {};
-  const values = {1:"2",2:"3",3:"4",4:"5",5:"6",6:"7",7:"8",8:"9",9:"10",10:"J",11:"Q",12:"K",13:"A"};
+  // const values = {1:"2",2:"3",3:"4",4:"5",5:"6",6:"7",7:"8",8:"9",9:"10",10:"J",11:"Q",12:"K",13:"A"};
+  const values = {1:"2",2:"3",3:"4",4:"5"}
   const inner = '<div class="card__inner ';
   const symbol = '<div class="card__symbol ';
   const symbolC = '<div class="card__symbol"></div>';
@@ -50,7 +51,6 @@ if (typeof window !== "undefined") {
       default: innercard = `${inner}"><img src="img/cardback.png">${c}`;
     }
   }
-  
   
   function createCard (naipeOf, valueOf, keyOf) {
     let card = {naipe : naipeOf , value : valueOf, key : keyOf};
@@ -108,17 +108,41 @@ if (typeof window !== "undefined") {
     scoreTwo : document.getElementById("scoreTwo"),
     buttonContainer : document.getElementById("buttonContainer"),
     buttonWar : document.getElementById("buttonWar"),
+    buttonResume : document.getElementById("buttonResume"),
     button : document.querySelector(".btn-13")
     }
   }
   
   function play() {
+     display("normal");
      p1card = p1Deck.shift();
      p2card = p2Deck.shift();
      container.p1div.innerHTML = generateCard(p1card.naipe, p1card.value);
      container.p2div.innerHTML = generateCard(p2card.naipe, p2card.value);
      compare(parseInt(p1card.key),parseInt(p2card.key));
+  }
 
+
+
+
+  function checkWinner(argument) {
+    if(p1Deck.length <= argument) {
+      container.warMessage.innerHTML = "Player 2 Winns";
+      container.p1div.style.display = "none";
+      container.p2div.style.display = "none";
+      container.buttonContainer.style.display = "none";
+      return true;
+    }
+    else if(p2Deck.length <= argument) {
+      container.warMessage.innerHTML = "Player 1 Winns";
+      container.p2div.style.display = "none";
+      container.p1div.style.display = "none";
+      container.buttonContainer.style.display = "none";
+      return true;
+    }
+    else {return false;}
+  
+    
   }
   
   function compare(p1,p2) { 
@@ -133,19 +157,18 @@ if (typeof window !== "undefined") {
        p1Deck.push(p1card,p2card);
        container.p1div.setAttribute('class','move-left');
        container.p2div.setAttribute('class','move-left');
-       container.warMessage.innerHTML = "";
-     
+       checkWinner(0);
       } 
       else if (p1 < p2) {
         p2Deck.push(p1card,p2card);
         container.p1div.setAttribute('class','move-right');
         container.p2div.setAttribute('class','move-right');
-        container.warMessage.innerHTML = "";
+        checkWinner(0);
         
      }
      else {
-      debugger;
       war();
+     
     }
   }
 
@@ -154,56 +177,89 @@ if (typeof window !== "undefined") {
     container.scoreTwo.innerHTML = `Cards Left: ${p2Deck.length}`;
   }
   document.getElementById("button").addEventListener("click", changeCardCounter);
+  document.getElementById("buttonResume").addEventListener("click",changeCardCounter);
 
 
 
   function war() {
-    //make war buttons show
-   p1WarCards = p1Deck.splice(0, 3);
-   p2WarCards = p2Deck.splice(0, 3);
+   if(!checkWinner(3)) {
    display("war");
-   
-
-   container.warMessage.innerHTML = "WARRRRRRRR";
    Array.from(container.warbacks).forEach(element => {element.innerHTML = generateCard(".",".")});
-
+   }
   }
 
+
+  
+
   function display(state) {
-    if(state = "war") {
+    if(state == "war") {
     container.buttonContainer.style.display = "none";
     container.warContainer.style.display = "flex";
     container.p1normal.style.display = "none";
     container.p2normal.style.display = "none";
     container.p1war.style.display = "block";
     container.p2war.style.display = "block";
-    } else{
+    container.warMessage.innerHTML = "WARRRRRRRR";
+    container.buttonWar.style.display = "inline-block";
+    container.warf1.innerHTML = "";
+    container.warf2.innerHTML = "";
+    } else {
       container.buttonContainer.style.display = "flex";
       container.warContainer.style.display = "none";
       container.p1normal.style.display = "block";
       container.p2normal.style.display = "block";
       container.p1war.style.display = "none";
       container.p2war.style.display = "none";
+      container.warMessage.innerHTML = "";
     }
   }
 
-  function warButton() {
+  function warButton() { 
+    container.warf1.innerHTML = "";
+    container.warf2.innerHTML = "";
+    p1WarCards = p1Deck.splice(0, 3);
+    p2WarCards = p2Deck.splice(0, 3);
     let p1cardWar = p1Deck.shift();
     let p2cardWar = p2Deck.shift();
     container.warf1.innerHTML = generateCard(p1cardWar.naipe, p1cardWar.value);
     container.warf2.innerHTML = generateCard(p2cardWar.naipe, p2cardWar.value);
-  
-      if(p1cardWar.key > p2cardWar.key) {
+
+      if(parseInt(p1cardWar.key) > parseInt(p2cardWar.key)) {
         p1Deck.push(p1card,p2card,p1cardWar,p2cardWar);
         p1Deck = [...p1Deck,...p1WarCards,...p2WarCards];
-   
-      } else if (p2cardWar.key > p1cardWar.key) { 
+        container.p1war.setAttribute('class','move-left');
+        container.p2war.setAttribute('class','move-left');
+        container.buttonWar.style.display = "none";
+
+        container.p1war.addEventListener("animationend", function() {
+          container.p1war.removeAttribute('class');
+        });
+        container.p2war.addEventListener("animationend", function() {
+          container.p2war.removeAttribute('class');
+        });
+      
+      
+      } else if (parseInt(p2cardWar.key) > parseInt(p1cardWar.key)) { 
         p2Deck.push(p1card,p2card,p1cardWar,p2cardWar);
         p2Deck = [...p2Deck,...p1WarCards,...p2WarCards];
-  
-      } else {war();}
+        container.p1war.setAttribute('class','move-right');
+        container.p2war.setAttribute('class','move-right');
+        container.buttonWar.style.display = "none";
+
+        container.p1war.addEventListener("animationend", function() {
+          container.p1war.removeAttribute('class');
+        });
+        container.p2war.addEventListener("animationend", function() {
+          container.p2war.removeAttribute('class');
+        });
+      } else {war();
+      }
 
   }
+  function resume() {
+  }
+
+  
 }
   
   
