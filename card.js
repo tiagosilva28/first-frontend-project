@@ -2,8 +2,7 @@ if (typeof window !== "undefined") {
   let deck = [];
   let p1Deck = [];
   let p2Deck = [];
-  
-  const warContainer = document.getElementById("warContainer");
+  let container = {};
   const values = {1:"2",2:"3",3:"4",4:"5",5:"6",6:"7",7:"8",8:"9",9:"10",10:"J",11:"Q",12:"K",13:"A"};
   const inner = '<div class="card__inner ';
   const symbol = '<div class="card__symbol ';
@@ -18,8 +17,8 @@ if (typeof window !== "undefined") {
   let p1card,p2card;
   let p1WarCards = [];
   let p2WarCards = [];
-  
-  
+
+
   function otherCards(value,naipe) {
     switch(value) {
       case "A": innercard = `${inner}${aCenter}${jCenter}">${column}">${symbol}${huge}">${c.repeat(3)}`;
@@ -67,17 +66,16 @@ if (typeof window !== "undefined") {
       } 
     }
     dealCards(deck);
+    makeContainers();
   }
   drawDeck();
   
   function dealCards(deck) {
-    
     // Shuffle 
     for (let i = deck.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [deck[i], deck[j]] = [deck[j], deck[i]];
     }
-    
     // Distribute the cards
       p1Deck = deck.slice(0,(deck.length/2));
       p2Deck = deck.slice((deck.length/2), deck.length);
@@ -92,113 +90,126 @@ if (typeof window !== "undefined") {
       </section>`;
   return card;
   }
-  
 
+  function makeContainers() {
+    container = {
+    p1div : document.getElementById("p1card"),
+    p2div : document.getElementById("p2card"),
+    p1normal : document.getElementById("p1normal"),
+    p2normal : document.getElementById("p2normal"),
+    p1war : document.getElementById("p1war"),
+    p2war : document.getElementById("p2war"),
+    warf1 : document.getElementById("warf1"),
+    warf2 : document.getElementById("warf2"),
+    warContainer : document.getElementById("warContainer"),
+    warMessage : document.getElementById("warMessage"),
+    warbacks : document.getElementsByClassName("warback"),
+    scoreOne : document.getElementById("scoreOne"),
+    scoreTwo : document.getElementById("scoreTwo"),
+    buttonContainer : document.getElementById("buttonContainer"),
+    buttonWar : document.getElementById("buttonWar"),
+    button : document.querySelector(".btn-13")
+    }
+  }
+  
   function play() {
-     const element1 = document.getElementById("p1card");
-     const element2 = document.getElementById("p2card");
-      p1card = p1Deck.shift();
-      p2card = p2Deck.shift();
-     element1.innerHTML = generateCard(p1card.naipe, p1card.value);
-     element2.innerHTML = generateCard(p2card.naipe, p2card.value);
-     compare(p1card.key,p2card.key);
+     p1card = p1Deck.shift();
+     p2card = p2Deck.shift();
+     container.p1div.innerHTML = generateCard(p1card.naipe, p1card.value);
+     container.p2div.innerHTML = generateCard(p2card.naipe, p2card.value);
+     compare(parseInt(p1card.key),parseInt(p2card.key));
 
   }
   
   function compare(p1,p2) { 
-    let player1 = document.getElementById("p1card");
-    let player2 = document.getElementById("p2card");
-    if (p1 > p2) { 
-     p1Deck.push(p1card,p2card);
-     player1.setAttribute('class','move-left');
-     player2.setAttribute('class','move-left');
-     player1.display
-    } 
-     else if (p1 < p2) {
-     p2Deck.push(p1card,p2card);
-     player1.setAttribute('class','move-right');
-     player2.setAttribute('class','move-right');
+    container.p1div.addEventListener("animationend", function() {
+      container.p1div.removeAttribute('class');
+    });
+    container.p2div.addEventListener("animationend", function() {
+      container.p2div.removeAttribute('class');
+    });
+
+     if (p1 > p2) { 
+       p1Deck.push(p1card,p2card);
+       container.p1div.setAttribute('class','move-left');
+       container.p2div.setAttribute('class','move-left');
+       container.warMessage.innerHTML = "";
+     
+      } 
+      else if (p1 < p2) {
+        p2Deck.push(p1card,p2card);
+        container.p1div.setAttribute('class','move-right');
+        container.p2div.setAttribute('class','move-right');
+        container.warMessage.innerHTML = "";
+        
      }
      else {
+      debugger;
       war();
     }
   }
 
   function changeCardCounter(p1cards) {
-    p1cards = p1Deck.length;
-    p2cards = p2Deck.length;
-    document.getElementById("scoreOne").innerHTML = `Cards Left: ${p1cards}`;
-    document.getElementById("scoreTwo").innerHTML = `Cards Left: ${p2cards}`;
+    container.scoreOne.innerHTML = `Cards Left: ${p1Deck.length}`;
+    container.scoreTwo.innerHTML = `Cards Left: ${p2Deck.length}`;
   }
   document.getElementById("button").addEventListener("click", changeCardCounter);
 
-  
-  
+
+
   function war() {
-  
+    //make war buttons show
    p1WarCards = p1Deck.splice(0, 3);
    p2WarCards = p2Deck.splice(0, 3);
-   //disable normal button
-  //  let normalButton = document.querySelector(".btn-13")
-  //  normalButton.disabled = true;
-
-  
-
-   let p1normal = document.getElementById("p1normal");
-   let p2normal = document.getElementById("p2normal");
-   let p1war = document.getElementById("p1war");
-   let p2war = document.getElementById("p2war");
-   let p1 = document.getElementById("warf1");
-   let p2 = document.getElementById("warf2");
-   p1normal.style.display = "none";
-   p2normal.style.display = "none";
-   p1war.style.display = "block";
-   p2war.style.display = "block";
-   containersForWar(war);
-
+   display("war");
    
-  let p1cardWar = p1Deck.shift();
-  let p2cardWar = p2Deck.shift();
-  p1.innerHTML = generateCard(p1cardWar.naipe, p1cardWar.value);
-  p2.innerHTML = generateCard(p2cardWar.naipe, p2cardWar.value);
 
-    if(p1cardWar.key > p2cardWar.key) {
-      p1Deck.push(p1card,p2card,p1cardWar,p2cardWar);
-      p1Deck = [...p1Deck,...p1WarCards,...p2WarCards];
-      containersForWar(normal);
-      p1normal.style.display = "block";
-      p2normal.style.display = "block";
-      p1war.style.display = "none";
-      p2war.style.display = "none";
-     
-      return p1Deck;
-    } else if (p2cardWar.key > p1cardWar.key) { 
-      p2Deck.push(p1card,p2card,p1cardWar,p2cardWar);
-      p2Deck = [...p2Deck,...p1WarCards,...p2WarCards];
-      containersForWar(normal);
-      p1normal.style.display = "block";
-      p2normal.style.display = "block";
-      p1war.style.display = "none";
-      p2war.style.display = "none";
-      return p2Deck;
-    } else {war();}
-  }
-
-
-
-  function containersForWar(move){
-    if(move === "war") {
-      warContainer.innerHTML = "WARRRRRRRR";
-      const warbacks = document.getElementsByClassName("warback");
-      Array.from(warbacks).forEach(element => {element.innerHTML = generateCard(".",".")});
-    }
-    else {
-      warContainer.innerHTML = "";
-    }
-    
-   }
+   container.warMessage.innerHTML = "WARRRRRRRR";
+   Array.from(container.warbacks).forEach(element => {element.innerHTML = generateCard(".",".")});
 
   }
+
+  function display(state) {
+    if(state = "war") {
+    container.buttonContainer.style.display = "none";
+    container.warContainer.style.display = "flex";
+    container.p1normal.style.display = "none";
+    container.p2normal.style.display = "none";
+    container.p1war.style.display = "block";
+    container.p2war.style.display = "block";
+    } else{
+      container.buttonContainer.style.display = "flex";
+      container.warContainer.style.display = "none";
+      container.p1normal.style.display = "block";
+      container.p2normal.style.display = "block";
+      container.p1war.style.display = "none";
+      container.p2war.style.display = "none";
+    }
+  }
+
+  function warButton() {
+    let p1cardWar = p1Deck.shift();
+    let p2cardWar = p2Deck.shift();
+    container.warf1.innerHTML = generateCard(p1cardWar.naipe, p1cardWar.value);
+    container.warf2.innerHTML = generateCard(p2cardWar.naipe, p2cardWar.value);
+  
+      if(p1cardWar.key > p2cardWar.key) {
+        p1Deck.push(p1card,p2card,p1cardWar,p2cardWar);
+        p1Deck = [...p1Deck,...p1WarCards,...p2WarCards];
+   
+      } else if (p2cardWar.key > p1cardWar.key) { 
+        p2Deck.push(p1card,p2card,p1cardWar,p2cardWar);
+        p2Deck = [...p2Deck,...p1WarCards,...p2WarCards];
+  
+      } else {war();}
+
+  }
+}
+  
+  
+  
+  
+
   
   
   
@@ -206,9 +217,6 @@ if (typeof window !== "undefined") {
   
   
   
-  
-  
-  
-  
-  
+
+
   

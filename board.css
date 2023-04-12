@@ -249,7 +249,7 @@ padding-top: 100px;
 
 #warContainer {
   padding-bottom: 100px;
-        display: flex;
+        display: none;
         justify-content: center;
         align-items: center;
 }
@@ -314,4 +314,8 @@ padding-top: 100px;
   100% {
     right: 100%;
   }
+}
+
+.innerMargin {
+  margin : 0 20px;
 }
