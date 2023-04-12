@@ -69,10 +69,6 @@ if (typeof window !== "undefined") {
     dealCards(deck);
   }
   drawDeck();
-  console.log(deck);
-  console.log(p1Deck);
-  console.log(p2Deck);
-
   
   function dealCards(deck) {
     
@@ -84,12 +80,10 @@ if (typeof window !== "undefined") {
     
     // Distribute the cards
       p1Deck = deck.slice(0,(deck.length/2));
-
       p2Deck = deck.slice((deck.length/2), deck.length);
 
     }
   
-
   function generateCard(naipe,value){
     otherCards(value,naipe);
     let card =` 
@@ -99,6 +93,7 @@ if (typeof window !== "undefined") {
   return card;
   }
   
+
   function play() {
      const element1 = document.getElementById("p1card");
      const element2 = document.getElementById("p2card");
@@ -111,16 +106,19 @@ if (typeof window !== "undefined") {
   }
   
   function compare(p1,p2) { 
-    console.log(p1card);
+    let player1 = document.getElementById("p1card");
+    let player2 = document.getElementById("p2card");
     if (p1 > p2) { 
      p1Deck.push(p1card,p2card);
-     warContainer.innerHTML = "";
+     player1.setAttribute('class','move-left');
+     player2.setAttribute('class','move-left');
+     player1.display
     } 
-    
      else if (p1 < p2) {
      p2Deck.push(p1card,p2card);
-     warContainer.innerHTML = "";}
-
+     player1.setAttribute('class','move-right');
+     player2.setAttribute('class','move-right');
+     }
      else {
       war();
     }
@@ -132,7 +130,6 @@ if (typeof window !== "undefined") {
     document.getElementById("scoreOne").innerHTML = `Cards Left: ${p1cards}`;
     document.getElementById("scoreTwo").innerHTML = `Cards Left: ${p2cards}`;
   }
-
   document.getElementById("button").addEventListener("click", changeCardCounter);
 
   
@@ -145,46 +142,62 @@ if (typeof window !== "undefined") {
   //  let normalButton = document.querySelector(".btn-13")
   //  normalButton.disabled = true;
 
-  warContainer.innerHTML = "WARRRRRRRR";
+  
 
-   const warbacks = document.getElementsByClassName("warback");
-
-   let p2att = document.getElementById("p2normal");
-   p2att.style.display = "none";
-   let p1att = document.getElementById("p1normal");
-   p1att.style.display = "none";
-
+   let p1normal = document.getElementById("p1normal");
+   let p2normal = document.getElementById("p2normal");
    let p1war = document.getElementById("p1war");
+   let p2war = document.getElementById("p2war");
+   let p1 = document.getElementById("warf1");
+   let p2 = document.getElementById("warf2");
+   p1normal.style.display = "none";
+   p2normal.style.display = "none";
    p1war.style.display = "block";
+   p2war.style.display = "block";
+   containersForWar(war);
 
    
-   let p2war = document.getElementById("p2war");
-   p2war.style.display = "block";
+  let p1cardWar = p1Deck.shift();
+  let p2cardWar = p2Deck.shift();
+  p1.innerHTML = generateCard(p1cardWar.naipe, p1cardWar.value);
+  p2.innerHTML = generateCard(p2cardWar.naipe, p2cardWar.value);
 
-   Array.from(warbacks).forEach(element => {element.innerHTML = generateCard(".",".")});
-
-  let p1 = document.getElementById("warf1");
-  let p2 = document.getElementById("warf2");
-
- let p1cardWar = p1Deck.shift();
- let p2cardWar = p2Deck.shift();
-  p1.innerHTML = generateCard(p1card.naipe, p1card.value);
-  p2.innerHTML = generateCard(p2card.naipe, p2card.value);
-
-    // compare(p1card.key,p2card.key);
     if(p1cardWar.key > p2cardWar.key) {
       p1Deck.push(p1card,p2card,p1cardWar,p2cardWar);
       p1Deck = [...p1Deck,...p1WarCards,...p2WarCards];
-      console.log(p1Deck.length);
+      containersForWar(normal);
+      p1normal.style.display = "block";
+      p2normal.style.display = "block";
+      p1war.style.display = "none";
+      p2war.style.display = "none";
+     
       return p1Deck;
     } else if (p2cardWar.key > p1cardWar.key) { 
       p2Deck.push(p1card,p2card,p1cardWar,p2cardWar);
       p2Deck = [...p2Deck,...p1WarCards,...p2WarCards];
-      console.log(p2Deck.length);
+      containersForWar(normal);
+      p1normal.style.display = "block";
+      p2normal.style.display = "block";
+      p1war.style.display = "none";
+      p2war.style.display = "none";
       return p2Deck;
     } else {war();}
   }
-  // return;
+
+
+
+  function containersForWar(move){
+    if(move === "war") {
+      warContainer.innerHTML = "WARRRRRRRR";
+      const warbacks = document.getElementsByClassName("warback");
+      Array.from(warbacks).forEach(element => {element.innerHTML = generateCard(".",".")});
+    }
+    else {
+      warContainer.innerHTML = "";
+    }
+    
+   }
+
   }
   
   

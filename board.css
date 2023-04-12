@@ -281,3 +281,37 @@ padding-top: 100px;
   width: 212px;
   height: 320px;
 } */
+
+.move-right {
+  position: relative;
+  animation-name: moveRight;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+.move-left {
+  position: relative;
+  animation-name: moveLeft;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes moveRight {
+  0% {
+    left: 0px;
+  }
+  100% {
+    left: 200px;
+  }
+
+
+}
+
+@keyframes moveLeft {
+  0% {
+    right: 0;
+  }
+  100% {
+    right: 100%;
+  }
+}
