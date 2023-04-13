@@ -1,4 +1,5 @@
 .container {
+  /* background-color: #03c8a8; */
   font-family: 'Lato', sans-serif;
     display: grid;
     justify-items:center;
@@ -318,4 +319,23 @@ padding-top: 100px;
 
 .innerMargin {
   margin : 0 20px;
+}
+
+#warText {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: crimson;
+  background-color: darkgoldenrod;
+}
+#warMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: crimson;
+  background-color: darkgoldenrod;
 }
