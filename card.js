@@ -3,8 +3,8 @@ if (typeof window !== "undefined") {
   let p1Deck = [];
   let p2Deck = [];
   let container = {};
-  // const values = {1:"2",2:"3",3:"4",4:"5",5:"6",6:"7",7:"8",8:"9",9:"10",10:"J",11:"Q",12:"K",13:"A"};
-  const values = { 1: "2", 2: "3", 3: "4", 4: "5" };
+  const values = {1:"2",2:"3",3:"4",4:"5",5:"6",6:"7",7:"8",8:"9",9:"10",10:"J",11:"Q",12:"K",13:"A"};
+  // const values = { 1: "2", 2: "3", 3: "4", 4: "5" };
   const inner = '<div class="card__inner ';
   const symbol = '<div class="card__symbol ';
   const symbolC = '<div class="card__symbol"></div>';
@@ -176,16 +176,16 @@ if (typeof window !== "undefined") {
 
   function checkWinner(argument) {
     if (p1Deck.length <= argument) {
-      container.warText.innerHTML = "Player 2 Winns";
-      container.p1div.style.display = "none";
-      container.p2div.style.display = "none";
+      if(argument > 0) {container.p1div.style.display = "f"
+        container.warText.innerHTML = "Player 2 Winns because Player 1 has not enough cards for War";}
+      else {container.warText.innerHTML = "Player 2 Winns";}
       container.buttonContainer.style.display = "none";
       container.newGame.style.display = "flex";
+
       return true;
     } else if (p2Deck.length <= argument) {
-      container.warText.innerHTML = "Player 1 Winns";
-      container.p2div.style.display = "none";
-      container.p1div.style.display = "none";
+      if(argument > 0) {container.warText.innerHTML = "Player 1 Winns because Player 2 has not enough cards for War";}
+      else {container.warText.innerHTML = "Player 1 Winns";}
       container.buttonContainer.style.display = "none";
       container.newGame.style.display = "flex";
       return true;
@@ -206,7 +206,7 @@ if (typeof window !== "undefined") {
       p1Deck.push(p1card, p2card);
       container.p1div.setAttribute("class", "move-left");
       container.p2div.setAttribute("class", "move-leftEx");
-      //set  play button to disable while animation
+
       container.p1div.addEventListener("animationstart", function () {
         container.button.disabled = true;
       });
@@ -215,7 +215,7 @@ if (typeof window !== "undefined") {
       p2Deck.push(p1card, p2card);
       container.p1div.setAttribute("class", "move-rightEx");
       container.p2div.setAttribute("class", "move-right");
-        //set  play button to disable while animation
+
         container.p2div.addEventListener("animationstart", function () {
           container.button.disabled = true;
         });
@@ -223,7 +223,7 @@ if (typeof window !== "undefined") {
     } else {
       war();
     }
-    //set play button to enable after animation
+
     container.p2div.addEventListener("animationend", function () {
       container.button.disabled = false;
     });
@@ -259,8 +259,6 @@ if (typeof window !== "undefined") {
       container.buttonWar.style.display = "inline-block";
       container.warf1.innerHTML = "";
       container.warf2.innerHTML = "";
-      // Array.from(container.pattempt).forEach((element) => {
-      //   element.style.display = "none";});
     } else {
       container.buttonContainer.style.display = "flex";
       container.warContainer.style.display = "none";
@@ -292,8 +290,7 @@ if (typeof window !== "undefined") {
       
       container.buttonWar.style.display = "none";
       container.p1div.addEventListener("animationstart", function () {
-        Array.from(container.pattempt).forEach((element) => {
-        element.style.display = "none";});
+      
       });  
 
       container.p1war.addEventListener("animationend", function () {
@@ -310,8 +307,6 @@ if (typeof window !== "undefined") {
 
       container.buttonWar.style.display = "none";
       container.p1div.addEventListener("animationstart", function () {
-        Array.from(container.pattempt).forEach((element) => {
-        element.style.display = "none";});
       });
 
       container.p1war.addEventListener("animationend", function () {
