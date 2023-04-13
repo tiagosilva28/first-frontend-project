@@ -3,8 +3,8 @@ if (typeof window !== "undefined") {
   let p1Deck = [];
   let p2Deck = [];
   let container = {};
-  const values = {1:"2",2:"3",3:"4",4:"5",5:"6",6:"7",7:"8",8:"9",9:"10",10:"J",11:"Q",12:"K",13:"A"};
-  // const values = { 1: "2", 2: "3", 3: "4", 4: "5" };
+  // const values = {1:"2",2:"3",3:"4",4:"5",5:"6",6:"7",7:"8",8:"9",9:"10",10:"J",11:"Q",12:"K",13:"A"};
+  const values = { 1: "2", 2: "3", 3: "4", 4: "5" };
   const inner = '<div class="card__inner ';
   const symbol = '<div class="card__symbol ';
   const symbolC = '<div class="card__symbol"></div>';
@@ -158,11 +158,14 @@ if (typeof window !== "undefined") {
       buttonContainer: document.getElementById("buttonContainer"),
       buttonWar: document.getElementById("buttonWar"),
       buttonResume: document.getElementById("buttonResume"),
-      button: document.getElementById("button")
+      button: document.getElementById("button"),
+      pattempt: document.getElementsByClassName("pattempt"),
+      newGame: document.getElementById("newGame")
     };
   }
 
   function play() {
+    checkWinner(0);
     display("normal");
     p1card = p1Deck.shift();
     p2card = p2Deck.shift();
@@ -177,12 +180,14 @@ if (typeof window !== "undefined") {
       container.p1div.style.display = "none";
       container.p2div.style.display = "none";
       container.buttonContainer.style.display = "none";
+      container.newGame.style.display = "flex";
       return true;
     } else if (p2Deck.length <= argument) {
       container.warText.innerHTML = "Player 1 Winns";
       container.p2div.style.display = "none";
       container.p1div.style.display = "none";
       container.buttonContainer.style.display = "none";
+      container.newGame.style.display = "flex";
       return true;
     } else {
       return false;
@@ -200,7 +205,7 @@ if (typeof window !== "undefined") {
     if (p1 > p2) {
       p1Deck.push(p1card, p2card);
       container.p1div.setAttribute("class", "move-left");
-      container.p2div.setAttribute("class", "move-left");
+      container.p2div.setAttribute("class", "move-leftEx");
       //set  play button to disable while animation
       container.p1div.addEventListener("animationstart", function () {
         container.button.disabled = true;
@@ -208,7 +213,7 @@ if (typeof window !== "undefined") {
       checkWinner(0);
     } else if (p1 < p2) {
       p2Deck.push(p1card, p2card);
-      container.p1div.setAttribute("class", "move-right");
+      container.p1div.setAttribute("class", "move-rightEx");
       container.p2div.setAttribute("class", "move-right");
         //set  play button to disable while animation
         container.p2div.addEventListener("animationstart", function () {
@@ -250,10 +255,12 @@ if (typeof window !== "undefined") {
       container.p2normal.style.display = "none";
       container.p1war.style.display = "block";
       container.p2war.style.display = "block";
-      container.warText.innerHTML = "WARRRRRRRR";
+      container.warText.innerHTML = `<img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZGIxMjZkZTk1Yjk4NWExN2UxMTEwYWM1NDA1MTllYWEzZDc2N2JiOSZjdD1n/3oEduYcStmVqMIbsxG/giphy.gif">`;
       container.buttonWar.style.display = "inline-block";
       container.warf1.innerHTML = "";
       container.warf2.innerHTML = "";
+      // Array.from(container.pattempt).forEach((element) => {
+      //   element.style.display = "none";});
     } else {
       container.buttonContainer.style.display = "flex";
       container.warContainer.style.display = "none";
@@ -262,6 +269,8 @@ if (typeof window !== "undefined") {
       container.p1war.style.display = "none";
       container.p2war.style.display = "none";
       container.warText.innerHTML = "";
+      Array.from(container.pattempt).forEach((element) => {
+        element.style.display = "flex";});
     }
   }
 
@@ -279,8 +288,13 @@ if (typeof window !== "undefined") {
       p1Deck.push(p1card, p2card, p1cardWar, p2cardWar);
       p1Deck = [...p1Deck, ...p1WarCards, ...p2WarCards];
       container.p1war.setAttribute("class", "move-left");
-      container.p2war.setAttribute("class", "move-left");
+      container.p2war.setAttribute("class", "move-leftEx");
+      
       container.buttonWar.style.display = "none";
+      container.p1div.addEventListener("animationstart", function () {
+        Array.from(container.pattempt).forEach((element) => {
+        element.style.display = "none";});
+      });  
 
       container.p1war.addEventListener("animationend", function () {
         container.p1war.removeAttribute("class");
@@ -291,9 +305,14 @@ if (typeof window !== "undefined") {
     } else if (parseInt(p2cardWar.key) > parseInt(p1cardWar.key)) {
       p2Deck.push(p1card, p2card, p1cardWar, p2cardWar);
       p2Deck = [...p2Deck, ...p1WarCards, ...p2WarCards];
-      container.p1war.setAttribute("class", "move-right");
+      container.p1war.setAttribute("class", "move-rightEx");
       container.p2war.setAttribute("class", "move-right");
+
       container.buttonWar.style.display = "none";
+      container.p1div.addEventListener("animationstart", function () {
+        Array.from(container.pattempt).forEach((element) => {
+        element.style.display = "none";});
+      });
 
       container.p1war.addEventListener("animationend", function () {
         container.p1war.removeAttribute("class");

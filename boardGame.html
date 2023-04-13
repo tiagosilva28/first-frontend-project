@@ -48,8 +48,8 @@
           <h3 class="title">Player 2 Attempt</h3>
           <div id="p2card"></div>
         </div>
-        <div id="p2war">
-          PLAYER 2 WARRRRRR
+        <div id="p2war"><p class="pattempt">PLAYER 2 WARRRRRR</p>
+         
           <div class="warback" style="z-index: -3; left: 10px"></div>
           <div class="warback" style="z-index: -2; left: 30px"></div>
           <div class="warback" style="z-index: -1; left: 50px"></div>
@@ -58,11 +58,10 @@
       </div>
       <div class="p1attempt" id="p1at">
         <div id="p1normal">
-          <h3 class="title">Player 1 Attempt</h3>
+          <h3 class="title" >Player 1 Attempt</h3>
           <div id="p1card"></div>
         </div>
-        <div id="p1war">
-          PLAYER 1 WARRRRRR
+        <div id="p1war"><p class="pattempt">PLAYER 1 WARRRRRR</p>
           <div class="warback" style="z-index: -3; left: 10px"></div>
           <div class="warback" style="z-index: -2; left: 30px"></div>
           <div class="warback" style="z-index: -1; left: 50px"></div>
@@ -71,7 +70,10 @@
       </div>
     </div>
     <div id ="warMessage">
-      <span id="warText"></span>
+      <div id="warText"></div>
+    </div>
+    <div class="button-container">
+      <button id="newGame" class="custom-btn btn-13"  onclick="location.reload()">Start New Game</button>
     </div>
     <div id="warContainer">
       <button id="buttonWar" onclick="warButton()" class="custom-btn btn-13 innerMargin">
@@ -80,6 +82,7 @@
       <button id="buttonResume" onclick="play()" class="custom-btn btn-13 innerMargin">
         Resume
       </button>
+      
     </div>
     <div id="buttonContainer" class="button-container">
       <button id="button" onclick="play()" class="custom-btn btn-13">
