@@ -159,10 +159,14 @@ if (typeof window !== "undefined") {
       buttonWar: document.getElementById("buttonWar"),
       buttonResume: document.getElementById("buttonResume"),
       button: document.getElementById("button"),
-      pattempt: document.getElementsByClassName("pattempt"),
+      pattempt1: document.getElementById("pattempt1"),
+      pattempt2: document.getElementById("pattempt2"),
       newGame: document.getElementById("newGame")
     };
   }
+
+
+  
 
   function play() {
     checkWinner(0);
@@ -259,6 +263,9 @@ if (typeof window !== "undefined") {
       container.buttonWar.style.display = "inline-block";
       container.warf1.innerHTML = "";
       container.warf2.innerHTML = "";
+      container.pattempt1.style.display = "block";
+      container.pattempt2.style.display = "block"; 
+
     } else {
       container.buttonContainer.style.display = "flex";
       container.warContainer.style.display = "none";
@@ -267,8 +274,8 @@ if (typeof window !== "undefined") {
       container.p1war.style.display = "none";
       container.p2war.style.display = "none";
       container.warText.innerHTML = "";
-      Array.from(container.pattempt).forEach((element) => {
-        element.style.display = "flex";});
+      // Array.from(container.pattempt).forEach((element) => {
+      //   element.style.visibility = "visible";});
     }
   }
 
@@ -289,8 +296,9 @@ if (typeof window !== "undefined") {
       container.p2war.setAttribute("class", "move-leftEx");
       
       container.buttonWar.style.display = "none";
-      container.p1div.addEventListener("animationstart", function () {
-      
+      container.p1war.addEventListener("animationstart", function () {
+        container.pattempt1.style.display = "none";
+       container.pattempt2.style.display = "none";
       });  
 
       container.p1war.addEventListener("animationend", function () {
@@ -306,7 +314,9 @@ if (typeof window !== "undefined") {
       container.p2war.setAttribute("class", "move-right");
 
       container.buttonWar.style.display = "none";
-      container.p1div.addEventListener("animationstart", function () {
+      container.p1war.addEventListener("animationstart", function () {  
+       container.pattempt1.style.display = "none";
+       container.pattempt2.style.display = "none"; 
       });
 
       container.p1war.addEventListener("animationend", function () {
@@ -319,5 +329,4 @@ if (typeof window !== "undefined") {
       war();
     }
   }
-  function resume() {}
 }
